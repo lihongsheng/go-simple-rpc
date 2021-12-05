@@ -7,7 +7,7 @@ import (
 
 type Server struct {
 	l net.Listener
-	readHandler []func(param interface{})
+	readHandler  []func(param interface{})
 	writeHandler []func(param interface{})
 }
 
