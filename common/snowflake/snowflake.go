@@ -55,6 +55,7 @@ var maxDataCenterId = (1 << DATA_CENTER_BITS) - 1
 
 func GenerateId(dataCenterId int, machineId int,consistency bool) int64 {
 	nowTime := time.Now().UnixNano()
+	//时间回滚有可能产生重复的Id
 	if nowTime < lastTimestamp {
 		// 不允许时间回滚
 		if consistency {
@@ -63,7 +64,7 @@ func GenerateId(dataCenterId int, machineId int,consistency bool) int64 {
 			}
 		}
 	}
-	// 时间回滚有可能产生重复的Id
+	//  统一毫秒内增加步长
 	if lastTimestamp == nowTime {
 		if sequence > maxSequenceId {
 			return GenerateId(dataCenterId,machineId,consistency)
@@ -74,6 +75,6 @@ func GenerateId(dataCenterId int, machineId int,consistency bool) int64 {
 	}
 	lastTimestamp = nowTime
 	timeDiff := lastTimestamp - EPOCH_OFF_SET
-	lastId = int64(0 <<signLeftShift) | int64(timeDiff <<timestampLeftShift) | int64(dataCenterId <<dataCenterLeftShift) | int64(machineId <<machineLeftShift) | int64(sequence)
+	lastId =  int64(timeDiff <<timestampLeftShift) | int64(dataCenterId <<dataCenterLeftShift) | int64(machineId <<machineLeftShift) | int64(sequence)
 	return lastId
 }

@@ -1,5 +1,5 @@
 package common
 
-type response struct {
+type Response struct {
 	Params []interface{}
 }
