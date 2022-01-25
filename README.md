@@ -13,6 +13,11 @@ type Request struct {
 ```
 ### 一个RPC的请求流程
 客户端建立与服务端的链接 -> 基于客户端代理类，调用需要请求的方法 -> 生成请求体request，基于编码格式和协议格式，做数据转换->发送到服务端-》服务端接受到二进制报文，基于编码和协议格式，做反解码操作-》基于request的指定的server类和方法名调用注册的server方法返回数据-> 服务端把返回数据，编码返回给客户端->客户端反解码，拿到调用结果
+### 调式
+```go
+go run main.go -start server -port 9099
+go run main.go -start client -port 9099
+```
 ### 服务端
 
 ### 客户端
