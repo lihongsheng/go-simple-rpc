@@ -3,6 +3,7 @@ package client
 import (
 	"encoding/binary"
 	"encoding/json"
+	"fmt"
 	"go-simple-rpc/common"
 	"go-simple-rpc/common/protocol"
 	"go-simple-rpc/common/snowflake"
@@ -39,7 +40,9 @@ func (u UserClientProxy) GetUser(id int) common.User {
 	u.write(netBody)
 
 	response := u.read()
-	return response.Params[0].(common.User)
+	fmt.Println(response.Params)
+	return response.Params[0]
+	//return response.Params[0].(common.User)
 }
 
 func (u UserClientProxy)  write(message []byte)  {

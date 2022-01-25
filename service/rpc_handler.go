@@ -24,7 +24,7 @@ func RpcHandler(ct *common.LinkHandler,param interface{})  {
 		funcParam = append(funcParam,reflect.ValueOf(tmp))
 	}
 	ret := vOf.MethodByName(r.MethodName).Call(funcParam)
-	realReturn := make([]interface{},0)
+	realReturn := make([]common.User,0)
 	// 结果集转换
 	for _,rr := range ret {
 		realReturn = append(realReturn,rr.Interface().(common.User))

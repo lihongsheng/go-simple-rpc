@@ -1,5 +1,5 @@
 package common
 
 type Response struct {
-	Params []interface{}
+	Params []User
 }

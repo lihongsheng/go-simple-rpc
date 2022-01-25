@@ -28,7 +28,7 @@ func startServer(port int)  {
 // 客户端启动
 func startClient(port int) {
 	con,err := net.Dial("tcp",fmt.Sprintf("127.0.0.1:%d",port))
-	if err == nil {
+	if err != nil {
 		fmt.Println("err: ",err.Error())
 	}
 	fmt.Println("client success")
@@ -36,9 +36,17 @@ func startClient(port int) {
 	// 打印值
 	fmt.Println(userClient.GetUser(1))
 }
-var start = flag.String("start","client","请输入client或者server")
-var port = flag.Int("port",9099,"请输入端口号")
+var start string
+var port int
 
 func main() {
+	flag.StringVar(&start, "start","","start")
+	flag.IntVar(&port, "port",0,"port")
 	flag.Parse() //接受和解析 命令行参数
+	fmt.Println(start)
+	if  "server" == start {
+		startServer(port)
+	} else {
+		startClient(port)
+	}
 }
