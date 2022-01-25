@@ -32,7 +32,7 @@ func (s *Server) Run() {
 		conn, err := s.l.Accept()
 		if err != nil {
 			log.Println("rpc server: accept error:", err)
-			return
+			continue
 		}
 		go s.handlerConn(conn)
 	}
